@@ -17,8 +17,8 @@ namespace Solutions
 
             Solution solution = new Solution();
             Sort sort = new Sort();
-            var result = solution.PivotIndex(new int[] { 1, 7, 3, 6, 5, 6 });
-            
+            var result = solution.NextGreatestLetter(new char[] { 'c', 'f', 'j' },'a');
+
         }
 
     }
@@ -62,6 +62,24 @@ namespace Solutions
     /// </summary>
     public class Solution
     {
+        /// <summary>
+        /// 744. 寻找比目标字母大的最小字母
+        /// </summary>
+        /// <param name="letters"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public char NextGreatestLetter(char[] letters, char target)
+        {
+            for (int i = 0; i < letters.Length; i++)
+            {
+                if (letters[i]>target)
+                {
+                    return letters[i];
+                }
+            }
+            return letters[0];
+        }
+
         /// <summary>
         /// 724. 寻找数组的中心索引
         /// </summary>
