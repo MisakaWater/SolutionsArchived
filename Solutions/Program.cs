@@ -17,7 +17,7 @@ namespace Solutions
 
             Solution solution = new Solution();
             Sort sort = new Sort();
-            var result = solution.NextGreatestLetter(new char[] { 'c', 'f', 'j' },'a');
+            var result = solution.CheckIfExist(new int[] { 3, 1, 7, 11 });
 
         }
 
@@ -62,6 +62,54 @@ namespace Solutions
     /// </summary>
     public class Solution
     {
+        /// <summary>
+        /// 1346. 检查整数及其两倍数是否存在
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public bool CheckIfExist(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = 0; j < arr.Length; j++)
+                {
+                    if (i!=j)
+                    {
+                        if (arr[j]==2*arr[i])
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 1317. 将整数转换为两个无零整数的和
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public int[] GetNoZeroIntegers(int n)
+        {
+
+            var target = new int[] { 1, n - 1 };
+            bool flg = true;
+            while (flg)
+            {
+                if (target[0].ToString().IndexOf('0')!=-1 || target[1].ToString().IndexOf('0')!=-1)
+                {
+                    target[0] += 1;
+                    target[1] -= 1;
+                }
+                else
+                {
+                    flg = false;
+                }
+            }
+            return target;
+        }
+
         /// <summary>
         /// 744. 寻找比目标字母大的最小字母
         /// </summary>
