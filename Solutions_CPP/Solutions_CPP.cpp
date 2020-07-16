@@ -5,7 +5,6 @@ int main()
 {
 	Solution s;
 	string a = s.toLowerCase("HELLO");
-	;
 }
 class Solution {
 public:

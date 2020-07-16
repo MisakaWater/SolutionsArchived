@@ -17,8 +17,11 @@ namespace Solutions
 
             Solution solution = new Solution();
             Sort sort = new Sort();
-            var result = solution.CheckIfExist(new int[] { 3, 1, 7, 11 });
-
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var result = solution.MaxSlidingWindow(new int[] { 1, 3, -1, -3, 5, 3, 6, 7 }, 3);
+            stopwatch.Stop();
+            Console.WriteLine(stopwatch.ElapsedMilliseconds);
         }
 
     }
@@ -62,6 +65,52 @@ namespace Solutions
     /// </summary>
     public class Solution
     {
+
+        //public int[] MaxSlidingWindow(int[] nums, int k)
+        //{
+        //    var result = new List<int>();
+        //    for (int i = 0; i < nums.Length-1; i++)
+        //    {
+        //        if (i+k<=nums.Length)
+        //        {
+        //            var windowNums = nums[i..(i + k)];
+        //            for (int j = 0; j < windowNums.Length-1; j++)
+        //            {
+        //                if (windowNums[j]>windowNums[j+1])
+        //                {
+        //                    var temp = windowNums[j];
+        //                    windowNums[j] = windowNums[j + 1];
+        //                    windowNums[j + 1] = temp;
+        //                }
+        //            }
+        //            result.Add(windowNums[windowNums.Length - 1]);
+        //        }
+        //    }
+        //    return result.ToArray();
+        //}
+
+        /// <summary>
+        /// 9. 回文数
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public bool IsPalindrome(int x)
+        {
+            var str = x + "";
+            var left = 0;
+            var right = str.Length - 1;
+            while (left < right)
+            {
+                if (str[left] != str[right])
+                {
+                    return false;
+                }
+                left++;
+                right--;
+            }
+            return true;
+        }
+
         /// <summary>
         /// 1346. 检查整数及其两倍数是否存在
         /// </summary>
@@ -73,9 +122,9 @@ namespace Solutions
             {
                 for (int j = 0; j < arr.Length; j++)
                 {
-                    if (i!=j)
+                    if (i != j)
                     {
-                        if (arr[j]==2*arr[i])
+                        if (arr[j] == 2 * arr[i])
                         {
                             return true;
                         }
@@ -97,7 +146,7 @@ namespace Solutions
             bool flg = true;
             while (flg)
             {
-                if (target[0].ToString().IndexOf('0')!=-1 || target[1].ToString().IndexOf('0')!=-1)
+                if (target[0].ToString().IndexOf('0') != -1 || target[1].ToString().IndexOf('0') != -1)
                 {
                     target[0] += 1;
                     target[1] -= 1;
@@ -120,7 +169,7 @@ namespace Solutions
         {
             for (int i = 0; i < letters.Length; i++)
             {
-                if (letters[i]>target)
+                if (letters[i] > target)
                 {
                     return letters[i];
                 }
@@ -144,7 +193,7 @@ namespace Solutions
                 {
                     right += nums[j];
                 }
-                if (left==right)
+                if (left == right)
                 {
                     return i;
                 }
@@ -403,7 +452,6 @@ namespace Solutions
             {
                 A[i] = sorted[i];
             }
-            ;
         }
 
         /// <summary>
