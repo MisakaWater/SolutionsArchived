@@ -8,6 +8,9 @@ int main()
 }
 class Solution {
 public:
+	int bitwiseComplement(int N) {
+		
+    }
 	string toLowerCase(string str) {
 		for (size_t i = 0; i < str.length; i++)
 		{

@@ -19,9 +19,10 @@ namespace Solutions
             Sort sort = new Sort();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            var result = solution.MaxSlidingWindow(new int[] { 1, 3, -1, -3, 5, 3, 6, 7 }, 3);
+            var result = solution.HammingWeight(0b0000001111);
             stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds);
+            Console.WriteLine($"Result:{result}");
+            Console.WriteLine($"Run Time:{stopwatch.ElapsedMilliseconds}");
         }
 
     }
@@ -65,6 +66,113 @@ namespace Solutions
     /// </summary>
     public class Solution
     {
+
+        //剑指 Offer 15. 二进制中1的个数
+        public int HammingWeight(uint n)
+        {
+            var bit = Convert.ToString(n,2);
+            int count = 0;
+            for (int i = 0; i < bit.Length; i++)
+            {
+                if(bit[i]=='1'){
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        //551. 学生出勤记录 I
+        public bool CheckRecord(string s)
+        {
+            if (s.IndexOf("LLL") != -1)
+            {
+                return false;
+            }
+
+            int sub = 0;
+            int count = 0;
+            for (int i = 0; i < 2; i++)
+            {
+                var indexof = s[sub..s.Length].IndexOf("A");
+                if (indexof != -1)
+                {
+                    sub = indexof + 1;
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (count == 2)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        //剑指 Offer 58 - I. 翻转单词顺序
+        public string ReverseWords(string s)
+        {
+            var arr = s.Split(' ');
+            Stack<string> stack = new Stack<string>();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] != "")
+                {
+                    stack.Push(arr[i]);
+                }
+            }
+            return string.Join(' ', stack);
+        }
+
+        //面试题 05.06. 整数转换
+        public int ConvertInteger(int A, int B)
+        {
+            //汉明距离
+            int n = A ^ B;
+            int count = 0;
+            while (n != 0)
+            {
+                n = (n & n - 1);
+                ++count;
+            }
+            return count;
+        }
+        //1009. 十进制整数的反码
+        public int BitwiseComplement(int N)
+        {
+            string bit = Convert.ToString(N, 2);
+            List<char> result = new List<char>();
+            for (int i = 0; i < bit.Length; i++)
+            {
+                if (bit[i] == '0')
+                {
+                    result.Add('1');
+                }
+                else
+                {
+                    result.Add('0');
+                }
+            }
+            var str = new string(result.ToArray());
+            return Convert.ToInt32(str, 2);
+        }
+        public int ArrangeCoins(int n)
+        {
+            int i = 1;
+            while (n > 0)
+            {
+                n = n - i;
+                if (n < 0)
+                {
+                    break;
+                }
+                i++;
+            }
+            return i - 1;
+        }
 
         //public int[] MaxSlidingWindow(int[] nums, int k)
         //{
