@@ -19,21 +19,9 @@ namespace Solutions
             Sort sort = new Sort();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            var result = solution.RunningSum(new int[] { 3, 1, 2, 10, 1 });
+            var result = solution.AddToArrayForm(new int[] { 9,9,9,9,9,9,9,9,9,9 },1);
             stopwatch.Stop();
-            if (result.GetType() == typeof(int[]))
-            {
-                Console.WriteLine($"Result:");
-                for (int i = 0; i < result.Length; i++)
-                {
-                    Console.WriteLine(result[i]);
-                }
-            }
-            else
-            {
-                Console.WriteLine($"Result:{result}");
-            }
-
+            Console.WriteLine($"Result:{result}");
             Console.WriteLine($"Run Time:{stopwatch.ElapsedMilliseconds}");
         }
 
@@ -74,25 +62,63 @@ namespace Solutions
         }
     }
 
-    public class ListNode
-    {
-        public int val;
-        public ListNode next;
-        public ListNode(int x) { val = x; }
-    }
-
     /// <summary>
     /// leetcode-cn.com 题库
     /// </summary>
     public class Solution
     {
-
-
-
-        public int[] ReversePrint(ListNode head)
+        public IList<int> AddToArrayForm(int[] A, int K)
         {
-            
+            var sb = new StringBuilder();
+            for (int i = 0; i < A.Length; i++)
+            {
+                sb.Append(A[i]);
+            }
+            ulong numA = 0;
+            ulong.TryParse(sb.ToString(), out numA);
+            var str = (numA + (ulong)K) + "";
+            var list = new List<int>();
+            for (int i = 0; i < str.Length; i++)
+            {
+                ulong _ = 0;
+                ulong.TryParse(str[i]+"",out _);
+                list.Add(_);
+            }
+            return list;
         }
+        //905. 按奇偶排序数组
+        public int[] SortArrayByParity(int[] A)
+        {
+            var odd = new List<int>();
+            var even = new List<int>();
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] % 2 == 1)
+                {
+                    odd.Add(A[i]);
+                }
+                else
+                {
+                    even.Add(A[i]);
+                }
+            }
+            even.AddRange(odd);
+            return even.ToArray();
+        }
+        //344. 反转字符串
+        public void ReverseString(char[] s)
+        {
+            int i = 0;
+            int j = s.Length - 1;
+            while (i < j)
+            {
+                (s[i], s[j]) = (s[j], s[i]);
+                i++;
+                j--;
+            }
+        }
+
+
         //1480. 一维数组的动态和
         public int[] RunningSum(int[] nums)
         {
