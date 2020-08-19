@@ -19,9 +19,21 @@ namespace Solutions
             Sort sort = new Sort();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            var result = solution.HammingWeight(0b0000001111);
+            var result = solution.RunningSum(new int[] { 3, 1, 2, 10, 1 });
             stopwatch.Stop();
-            Console.WriteLine($"Result:{result}");
+            if (result.GetType() == typeof(int[]))
+            {
+                Console.WriteLine($"Result:");
+                for (int i = 0; i < result.Length; i++)
+                {
+                    Console.WriteLine(result[i]);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Result:{result}");
+            }
+
             Console.WriteLine($"Run Time:{stopwatch.ElapsedMilliseconds}");
         }
 
@@ -61,20 +73,108 @@ namespace Solutions
             return nums;
         }
     }
+
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int x) { val = x; }
+    }
+
     /// <summary>
     /// leetcode-cn.com 题库
     /// </summary>
     public class Solution
     {
 
+
+
+        public int[] ReversePrint(ListNode head)
+        {
+            
+        }
+        //1480. 一维数组的动态和
+        public int[] RunningSum(int[] nums)
+        {
+            var runingnums = new List<int>();
+            for (int i = 1; i <= nums.Length; i++)
+            {
+                var sum = 0;
+                for (int j = 0; j < i; j++)
+                {
+                    sum += nums[j];
+                }
+                runingnums.Add(sum);
+            }
+            return runingnums.ToArray();
+        }
+        //剑指 Offer 03. 数组中重复的数字
+        public int FindRepeatNumber(int[] nums)
+        {
+            Array.Sort(nums);
+            var num = nums[0];
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (num == nums[i])
+                {
+                    return num;
+                }
+                num = nums[i];
+            }
+            return 0;
+        }
+        //1523. 在区间范围内统计奇数数目
+        public int CountOdds(int low, int high)
+        {
+            int num = 1;
+            if (low % 2 == 0 && high % 2 == 0)
+            {
+                num = 0;
+            }
+            return ((high - low) / 2) + num;
+        }
+        //557. 反转字符串中的单词 III
+        public string ReverseWords557(string s)
+        {
+            var arr = s.Split(" ");
+            Stack<char> stack = new Stack<char>();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                stack.Clear();
+                for (int j = 0; j < arr[i].Length; j++)
+                {
+                    stack.Push(arr[i][j]);
+                }
+                arr[i] = new string(stack.ToArray());
+            }
+            return string.Join(' ', arr);
+        }
+
+        //1. 两数之和
+        public int[] TwoSum(int[] nums, int target)
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    if (nums[i] + nums[j] == target)
+                    {
+                        return new int[] { i, j };
+                    }
+                }
+            }
+            return new int[] { -1, -1 };
+        }
+
         //剑指 Offer 15. 二进制中1的个数
         public int HammingWeight(uint n)
         {
-            var bit = Convert.ToString(n,2);
+            var bit = Convert.ToString(n, 2);
             int count = 0;
             for (int i = 0; i < bit.Length; i++)
             {
-                if(bit[i]=='1'){
+                if (bit[i] == '1')
+                {
                     count++;
                 }
             }
