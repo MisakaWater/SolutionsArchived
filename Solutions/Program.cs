@@ -17,9 +17,11 @@ namespace Solutions
 
             Solution solution = new Solution();
             Sort sort = new Sort();
+            Solution.WordsFrequency w = new Solution.WordsFrequency(new string[]{"i", "have", "an", "apple", "he", "have", "a", "pen"});
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            var result = solution.AddToArrayForm(new int[] { 9,9,9,9,9,9,9,9,9,9 },1);
+            var a = w.Get("have");
+            var result = solution.BusyStudent(new int[] { 1, 2, 3 }, new int[] { 3, 2, 7 }, 4);
             stopwatch.Stop();
             Console.WriteLine($"Result:{result}");
             Console.WriteLine($"Run Time:{stopwatch.ElapsedMilliseconds}");
@@ -67,8 +69,48 @@ namespace Solutions
     /// </summary>
     public class Solution
     {
+        //面试题 16.02. 单词频率
+        public class WordsFrequency
+        {
+            private string[] Book{get;set;}
+            public WordsFrequency(string[] book)
+            {
+                Book = book;
+            }
+
+            public int Get(string word)
+            {
+                var count = 0;
+                var b = Book.GroupBy(b=>b);
+                return count;
+            }
+        }
+
+        //1450. 在既定时间做作业的学生人数
+        public int BusyStudent(int[] startTime, int[] endTime, int queryTime)
+        {
+            int count = 0;
+            for (int i = 0; i < startTime.Length; i++)
+            {
+                if (startTime[i] <= queryTime && endTime[i] >= queryTime)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+
+        //989. 数组形式的整数加法
+
+        //类型长度不够
+        // 输入：A = [9,9,9,9,9,9,9,9,9,9], K = 1
+        // 输出：[1,0,0,0,0,0,0,0,0,0,0]
+        // 解释：9999999999 + 1 = 10000000000
+
         public IList<int> AddToArrayForm(int[] A, int K)
         {
+
             var sb = new StringBuilder();
             for (int i = 0; i < A.Length; i++)
             {
@@ -81,8 +123,8 @@ namespace Solutions
             for (int i = 0; i < str.Length; i++)
             {
                 ulong _ = 0;
-                ulong.TryParse(str[i]+"",out _);
-                list.Add(_);
+                ulong.TryParse(str[i] + "", out _);
+                list.Add((int)_);
             }
             return list;
         }

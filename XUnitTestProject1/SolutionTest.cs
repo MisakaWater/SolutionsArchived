@@ -74,7 +74,7 @@ namespace Solutions_CSharp_Tests
         public void FindRepeatNumber()
         {
             var sut = new Solutions.Solution();
-            var result = sut.FindRepeatNumber(new int[]{2, 3, 1, 0, 2, 5, 3});
+            var result = sut.FindRepeatNumber(new int[] { 2, 3, 1, 0, 2, 5, 3 });
             Assert.Equal(2, result);
         }
         [Fact]
@@ -82,7 +82,14 @@ namespace Solutions_CSharp_Tests
         {
             var sut = new Solutions.Solution();
             var result = sut.RunningSum(new int[] { 3, 1, 2, 10, 1 });
-            Assert.Equal(new int[]{3,4,6,16,17}, result);
+            Assert.Equal(new int[] { 3, 4, 6, 16, 17 }, result);
+        }
+        [Fact]
+        public void BusyStudent()
+        {
+            var sut = new Solutions.Solution();
+            var result = sut.BusyStudent(new int[] { 1, 2, 3 }, new int[] { 3, 2, 7 }, 4);
+            Assert.Equal(1, result);
         }
     }
 }
